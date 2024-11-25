@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "mongoose.h"
 #include "index_html.h"
 #include "favicon_ico.h"
 

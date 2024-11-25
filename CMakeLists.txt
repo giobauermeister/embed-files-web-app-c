@@ -1,14 +1,19 @@
 # Minimum CMake version
 cmake_minimum_required(VERSION 3.10)
+set(PROJECT_NAME SimpleServer)
 
 # Project name and language
-project(SimpleServer C)
+project(${PROJECT_NAME} C)
 
 # Add compiler flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -O2")
 
 # Specify the target executable and source files
-add_executable(SimpleServer src/main.c)
+add_executable(${PROJECT_NAME} src/main.c)
+
+# Add mongoose source files
+add_library(mongoose STATIC lib/mongoose/mongoose.c)
+set_target_properties(mongoose PROPERTIES C_STANDARD 99)
 
 # Optionally, set the C standard
 set(CMAKE_C_STANDARD 99)
@@ -44,7 +49,15 @@ add_custom_target(embed_files
 )
 
 # Ensure the embed_files target runs before the main executable is built
-add_dependencies(SimpleServer embed_files)
+add_dependencies(${PROJECT_NAME} embed_files)
 
 # Include the generated headers
 include_directories(${EMBED_OUTPUT_DIR})
+
+# Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/lib/mongoose
+    # ${CMAKE_SOURCE_DIR}/lib/ArduinoJson
+)
