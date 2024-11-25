@@ -1,14 +1,24 @@
 #include <stdio.h>
 #include "mongoose.h"
-#include "index_html.h"
-#include "favicon_ico.h"
+#include "web_server.h"
 
 int main() {
    // printf() displays the string inside quotation
-   printf("Hello, World!\n");
+   printf("Hello, SimpleServer!\n");
 
-   printf("Index.html (%d bytes):\n%.*s\n", index_html_len, index_html_len, index_html);
-   printf("Favicon.ico size: %d bytes\n", favicon_ico_len);
+   struct mg_mgr mgr;
+   // Initialize the Mongoose manager
+   mg_mgr_init(&mgr);
+   printf("Starting SimpleServer on http://localhost:8000\n");
+
+   // Create an HTTP listener
+   mg_http_listen(&mgr, "http://0.0.0.0:8000", ev_handler, NULL);
+
+   // Infinite event loop
+   for (;;) mg_mgr_poll(&mgr, 100);
+
+   // Free resources (never reached in this example)
+   mg_mgr_free(&mgr);
 
    return 0;
 }

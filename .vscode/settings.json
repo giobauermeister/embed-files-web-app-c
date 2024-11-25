@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "mongoose.h": "c"
+        "mongoose.h": "c",
+        "index_html.h": "c",
+        "embedded_files.h": "c"
     }
 }
