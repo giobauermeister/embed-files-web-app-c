@@ -20,7 +20,7 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Paths to the embedded files
-set(WEB_APP_DIR ${CMAKE_SOURCE_DIR}/web-app)
+set(WEB_APP_DIR ${CMAKE_SOURCE_DIR}/web-app-vuejs/dist)
 set(EMBED_OUTPUT_DIR ${CMAKE_BINARY_DIR})
 set(EMBED_HEADER ${EMBED_OUTPUT_DIR}/embedded_files.h)
 
